@@ -1,14 +1,14 @@
-MCAL/exi_interrupt/exi_interrupt.d MCAL/exi_interrupt/exi_interrupt.o: \
- ../MCAL/exi_interrupt/exi_interrupt.c \
- ../MCAL/exi_interrupt/EXI_INTERRUPT.h \
- ../MCAL/exi_interrupt/../MEMORYMAP.h \
- ../MCAL/exi_interrupt/../../SERVICE/std_types.h \
- ../MCAL/exi_interrupt/../../SERVICE/UTILES.h
+MCAL/EXI_INTERRUPT/EXI_INTERRUPT.d MCAL/EXI_INTERRUPT/EXI_INTERRUPT.o: \
+ ../MCAL/EXI_INTERRUPT/EXI_INTERRUPT.c \
+ ../MCAL/EXI_INTERRUPT/EXI_INTERRUPT.h \
+ ../MCAL/EXI_INTERRUPT/../MEMORYMAP.h \
+ ../MCAL/EXI_INTERRUPT/../../SERVICE/std_types.h \
+ ../MCAL/EXI_INTERRUPT/../../SERVICE/UTILES.h
 
-../MCAL/exi_interrupt/EXI_INTERRUPT.h:
+../MCAL/EXI_INTERRUPT/EXI_INTERRUPT.h:
 
-../MCAL/exi_interrupt/../MEMORYMAP.h:
+../MCAL/EXI_INTERRUPT/../MEMORYMAP.h:
 
-../MCAL/exi_interrupt/../../SERVICE/std_types.h:
+../MCAL/EXI_INTERRUPT/../../SERVICE/std_types.h:
 
-../MCAL/exi_interrupt/../../SERVICE/UTILES.h:
+../MCAL/EXI_INTERRUPT/../../SERVICE/UTILES.h:

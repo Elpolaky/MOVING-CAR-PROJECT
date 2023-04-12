@@ -45,53 +45,69 @@ void ready_State(void){
 }
 
 void app_Init(void){
-
+	sei();
+	Button_INIT(pind2);
+	EXI_Enable(EXT_INT_0);
+	EXI_SetCallBack(EXT_INT_0,Car_Stop);
+	EXI_Trigger(EXT_INT_0,LOW_LEVEL);
+	car_flag =1 ;
 	LED_INIT(pinb0);
 	LED_INIT(pinc1);
 	LED_INIT(pinc2);
-	LED_INIT(pinb3);
+	LED_INIT(pinc3);
 	Car_Motors_init();
+	
+	
 
 }
 
 void app_Start(void){
-	// delay after press start 
-	if (car_mode == 0)
-	{
-		ready_State();
-	}
-	
-	
-	else if(car_mode == 1){
 
-		longSide_start();
+if(car_flag==1){
+		// delay after press start 
+		if (car_mode == 0)
+		{
+			ready_State();
+		}
+	
+	
+		else if(car_mode == 1){
+
+			longSide_start();
 		
+		}
+	
+		// rotation
+		else if (car_mode == 2)
+		{
+			//mode_ovf= 1954 ;
+			mode_ovf= 19532;  // 5 seconds for simulation test
+			LED_OFF(pinc1);
+			LED_ON(pinc3);
+		}
+	
+		else if (car_mode == 3)
+		{
+			shortSide_start();
+		
+		}
+	
+		// rotation
+		else if(car_mode == 4){
+		
+			//mode_ovf= 1954 ;
+			mode_ovf= 19532;  // 5 seconds for simulation test
+			LED_OFF(pinc2);
+				LED_ON(pinc3);
+
+		}
 	}
+
+else {
 	
-	// rotation
-	else if (car_mode == 2)
-	{
-		//mode_ovf= 1954 ;
-		mode_ovf= 19532;  // 5 seconds for simulation test
-		LED_OFF(pinc1);
-		
+	Car_Stop();
 	}
-	
-	else if (car_mode == 3)
-	{
-		shortSide_start();
-		
-	}
-	
-	// rotation
-	else if(car_mode == 4){
-		
-		//mode_ovf= 1954 ;
-		mode_ovf= 19532;  // 5 seconds for simulation test
-		LED_OFF(pinc2);
-		
-	}
-	
-	
+
+
 }
 

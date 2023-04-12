@@ -111,12 +111,13 @@ void EXI_SetCallBack(EN_int_t Interrupt,void(*ptrf)(void))
 	}
 }
 
-
+uint8_t car_flag ; 
 ISR (INT0_vect)
 {
 	if (ptrf_INT_0 != NULL)
 	{
 		ptrf_INT_0();
+		car_flag = 0;
 	}
 }
 
@@ -126,6 +127,7 @@ ISR (INT1_vect)
 	{
 		ptrf_INT_1();
 	}
+	
 }
 
 ISR (INT2_vect)
