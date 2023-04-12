@@ -24,5 +24,5 @@
 void Car_Motors_init(void);
 void Car_Moving_FWD(void);
 void Car_Rotating(void);
-
+void Car_Stop(void);
 #endif /* MOTOR_H_ */

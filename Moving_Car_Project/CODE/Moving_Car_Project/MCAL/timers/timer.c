@@ -96,12 +96,12 @@ void TIMER_0_stop(void){
 }
 
 
-Timer_ErrorStatus TIMER_0_setIntialValue(uint8_t value){
+Timer_ErrorStatus TIMER_0_setIntialValue(double value){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
 
 	if(value < TIMR0_MAX_VALUE && value >= 0){
 		
-		TCNT0 = value ;
+		TCNT0 = ceil(value) ;
 	}else{
 		errorStatus = INVALID_VALUE;
 	}
@@ -152,6 +152,27 @@ void TIMER_0_DELAY_MS(double time_ms){
 	TIMER_0_setIntialValue(0);
 	TIMER_0_start(PRECALER_1);
 	TIMER_0_OvfNum(ovfNum);
+	
+}
+
+uint8_t setintial;
+void TIMER_0_pwm(float intial){
+	
+	uint8_t timer = ceil(intial);
+	clear_bit(TCCR0,WGM00);
+	clear_bit(TCCR0,WGM01);
+	
+	TCNT0 =   timer ;     
+	            
+	set_bit(TCCR0,CS00);
+	clear_bit(TCCR0,CS01);
+	set_bit(TCCR0,CS02);
+	
+	while(read_bit(TIFR,TOV0)==0);
+	TCCR0 = 0;
+	TCNT0 =   0;    
+	set_bit(TIFR,TOV0);
+	
 	
 }
 
@@ -323,5 +344,50 @@ void TIMER_2_DELAY_MS(double time_ms){
 	TIMER_2_setIntialValue(0);
 	TIMER_2_start(PRECALER_1);
 	TIMER_2_OvfNum(ovfNum2);
+	
+}
+
+
+
+
+
+
+
+void TIMER_2_INT(){
+	sei();
+	set_bit(TIMSK,TOIE2);
+	TIMER_2_init(NORMAL_MODE);
+	TIMER_2_setIntialValue(0);
+	TIMER_2_start(PRECALER_1);
+	
+	
+	
+}
+
+
+
+uint8_t car_mode = 0;
+int mode_ovf = 0;
+ int ovf = 0;
+
+ISR(TIMER2_OVF){
+	
+	if (ovf < mode_ovf ){
+		ovf++;
+	}
+	else if ( ovf == mode_ovf ){
+		ovf =0 ;
+	
+		if (car_mode < 4)
+		{
+			car_mode++;
+			
+			}else{
+			car_mode = 1 ;
+		}
+		
+		}
+		
+	
 	
 }

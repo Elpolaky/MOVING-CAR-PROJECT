@@ -1,31 +1,36 @@
-main.d main.o: .././main.c .././MCAL/DIO/DIO.h \
- .././MCAL/DIO/../../SERVICE/utiles.h .././MCAL/DIO/../memorymap.h \
- .././MCAL/DIO/../../SERVICE/std_types.h .././HAL/LED/LED.h \
- .././HAL/LED/../../MCAL/DIO/DIO.h .././HAL/MOTOR/MOTOR.h \
- .././HAL/MOTOR/../../MCAL/DIO/DIO.h .././MCAL/TIMERS/timer.h \
- .././MCAL/TIMERS/../../SERVICE/STD_TYPES.h \
- .././MCAL/TIMERS/../../SERVICE/UTILES.h .././MCAL/TIMERS/../MEMORYMAP.h
+main.d main.o: .././main.c .././APP/APP.h .././APP/../MCAL/DIO/DIO.h \
+ .././APP/../MCAL/DIO/../../SERVICE/utiles.h \
+ .././APP/../MCAL/DIO/../memorymap.h \
+ .././APP/../MCAL/DIO/../../SERVICE/std_types.h .././APP/../HAL/LED/LED.h \
+ .././APP/../HAL/LED/../../MCAL/DIO/DIO.h .././APP/../HAL/MOTOR/MOTOR.h \
+ .././APP/../HAL/MOTOR/../../MCAL/DIO/DIO.h \
+ .././APP/../MCAL/TIMERS/timer.h \
+ .././APP/../MCAL/TIMERS/../../SERVICE/STD_TYPES.h \
+ .././APP/../MCAL/TIMERS/../../SERVICE/UTILES.h \
+ .././APP/../MCAL/TIMERS/../MEMORYMAP.h
 
-.././MCAL/DIO/DIO.h:
+.././APP/APP.h:
 
-.././MCAL/DIO/../../SERVICE/utiles.h:
+.././APP/../MCAL/DIO/DIO.h:
 
-.././MCAL/DIO/../memorymap.h:
+.././APP/../MCAL/DIO/../../SERVICE/utiles.h:
 
-.././MCAL/DIO/../../SERVICE/std_types.h:
+.././APP/../MCAL/DIO/../memorymap.h:
 
-.././HAL/LED/LED.h:
+.././APP/../MCAL/DIO/../../SERVICE/std_types.h:
 
-.././HAL/LED/../../MCAL/DIO/DIO.h:
+.././APP/../HAL/LED/LED.h:
 
-.././HAL/MOTOR/MOTOR.h:
+.././APP/../HAL/LED/../../MCAL/DIO/DIO.h:
 
-.././HAL/MOTOR/../../MCAL/DIO/DIO.h:
+.././APP/../HAL/MOTOR/MOTOR.h:
 
-.././MCAL/TIMERS/timer.h:
+.././APP/../HAL/MOTOR/../../MCAL/DIO/DIO.h:
 
-.././MCAL/TIMERS/../../SERVICE/STD_TYPES.h:
+.././APP/../MCAL/TIMERS/timer.h:
 
-.././MCAL/TIMERS/../../SERVICE/UTILES.h:
+.././APP/../MCAL/TIMERS/../../SERVICE/STD_TYPES.h:
 
-.././MCAL/TIMERS/../MEMORYMAP.h:
+.././APP/../MCAL/TIMERS/../../SERVICE/UTILES.h:
+
+.././APP/../MCAL/TIMERS/../MEMORYMAP.h:

@@ -36,10 +36,10 @@
 #define INT1 7
 #define INT2 5
 /****data sheet attributes to enable context switching and to enable global interrupt*/
-#define INT0_vect __vector_1
-#define INT1_vect __vector_2
-#define INT2_vect __vector_3
-
+#define INT0_vect	 __vector_1
+#define INT1_vect	 __vector_2
+#define INT2_vect	 __vector_3
+#define TIMER2_OVF	 __vector_5
 
 #define sei() __asm__ __volatile__("sei" ::: "memory")
 #define cli() __asm__ __volatile__("cli" ::: "memory")
@@ -101,4 +101,6 @@ void INT_VECT(void)
 /**TIFR**/
 #define TOV2 6
 
+/***** TIMSK***/
+#define TOIE2 6
 #endif /* memorymap_H_ */
