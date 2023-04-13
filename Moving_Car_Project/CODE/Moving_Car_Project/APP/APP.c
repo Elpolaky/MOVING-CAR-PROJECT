@@ -66,7 +66,7 @@ void rotate_90degree_calculation (void)
 	//2- Calculate the rotation of each wheel to rotate 90 degrees:
 	//(2.1)  rotation per wheel= rotation_per_circle/0.25
 	//(2.2) time needed for car to turn 90 degree= (rotation per wheel/maximum speed percentage)*60) in sec
-	time_rotation_state= ((rotation_per_circle/0.25)/(max_speed*0.1))*60;
+	time_rotation_state= ((rotation_per_circle*0.25)/(max_speed*0.1))*60;
 	
 	
 }
@@ -95,9 +95,9 @@ LED four is the indicator of rotating phase*/
 void rotate_90degree_state (void)
 {
 	LED_OFF(pinc0);
-	//rotate_90degree_calculation();
-	//mode_ovf= time_rotation_state/ 0.000256 ;  // 3.75 seconds for simulation test
-	mode_ovf= 15625 ;
+	rotate_90degree_calculation();
+	mode_ovf= time_rotation_state/ 0.000256 ;  // 3.75 seconds for simulation test
+	//mode_ovf= 15625 ;
 	// Rotation state
 	Car_Rotating();
 	
