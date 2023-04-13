@@ -54,6 +54,8 @@ void Car_Rotating(void)
 this function is used to stop the 4 wheels by stopping the 4 motors*/
 void Car_Stop(void)
 {
+	
+	
   DIO_WRITEPIN(motor1_0,LOW);          
   DIO_WRITEPIN(motor1_1,LOW);           
   DIO_WRITEPIN(motor2_0,LOW);

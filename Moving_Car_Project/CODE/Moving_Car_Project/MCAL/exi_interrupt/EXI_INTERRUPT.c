@@ -111,28 +111,35 @@ void EXI_SetCallBack(EN_int_t Interrupt,void(*ptrf)(void))
 	}
 }
 
-uint8_t car_flag ; 
+uint8_t car_flag =0  ; 
 ISR (INT0_vect)
 {
+	car_flag = 0;
 	if (ptrf_INT_0 != NULL)
 	{
 		ptrf_INT_0();
-		car_flag = 0;
+		
+		DIO_WRITEPIN(pinc0,LOW);
+		DIO_WRITEPIN(pinc1,LOW);
+		DIO_WRITEPIN(pinc2,LOW);
+		DIO_WRITEPIN(pinc3,LOW);
+		
 	}
 }
 
 ISR (INT1_vect)
 {
-	if (ptrf_INT_0 != NULL)
+	if (ptrf_INT_1 != NULL)
 	{
-		ptrf_INT_1();
+		//ptrf_INT_1();
+		
 	}
-	
+	car_flag = 1 ;
 }
 
 ISR (INT2_vect)
 {
-	if (ptrf_INT_0 != NULL)
+	if (ptrf_INT_2 != NULL)
 	{
 		ptrf_INT_2();
 	}

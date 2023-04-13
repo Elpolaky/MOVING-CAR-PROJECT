@@ -4,7 +4,7 @@ int main(void)
 {
 
 		app_Init();
-		TIMER_2_INT();
+		
 
 while(1){
 

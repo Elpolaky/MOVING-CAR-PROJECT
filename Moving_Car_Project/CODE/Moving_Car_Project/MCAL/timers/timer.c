@@ -8,7 +8,9 @@
 #include "timer.h"
 #include <math.h>
 
-/************************* TIMER 0 *************************************/
+/*****************************************************************************************/
+//										 TIMER 0
+/*****************************************************************************************/
 Timer_ErrorStatus TIMER_0_init(Timer_Mode mode){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
 	
@@ -115,6 +117,7 @@ Timer_ErrorStatus TIMER_0_OvfNum(double overflow){
 	if (overflow > 0)
 	{
 		
+		
 		while(num_ovf<overflow){
 			
 			while(read_bit(TIFR,TOV0)==0);
@@ -155,7 +158,7 @@ void TIMER_0_DELAY_MS(double time_ms){
 	
 }
 
-uint8_t setintial;
+/*
 void TIMER_0_pwm(float intial){
 	
 	uint8_t timer = ceil(intial);
@@ -175,10 +178,30 @@ void TIMER_0_pwm(float intial){
 	
 	
 }
+*/
+
+/********************** PWM  ****************************/
+void TIMER_0_pwm(float intial){
+	
+	uint8_t timer = ceil(intial);
+	TIMER_0_init(NORMAL_MODE);
+	
+	TCNT0 =   timer ;
+	
+	TIMER_0_start(PRECALER_1024);
+	
+	TIMER_0_OvfNum(1);
+	TCCR0 = 0;
+	TCNT0 =   0;
+	set_bit(TIFR,TOV0);
+}
 
 
+/*****************************************************************************************/
+//										 TIMER2 
+/*****************************************************************************************/
 
-/************************************* TIMER2 ***********************************************/
+
 
 Timer_ErrorStatus TIMER_2_init(Timer_Mode mode){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
@@ -371,23 +394,24 @@ int mode_ovf = 0;
  int ovf = 0;
 
 ISR(TIMER2_OVF){
-	
-	if (ovf < mode_ovf ){
-		ovf++;
-	}
-	else if ( ovf == mode_ovf ){
-		ovf =0 ;
-	
-		if (car_mode < 4)
-		{
-			car_mode++;
+	if(car_flag == 1){
+		
+		if (ovf < mode_ovf ){
+			ovf++;
+		}
+		else if ( ovf == mode_ovf && mode_ovf!=0){
+			ovf =0 ;
 			
+			if (car_mode < 8)
+			{
+				car_mode++;
+				
 			}else{
-			car_mode = 1 ;
+				car_mode = 1 ;
+			}
+			
 		}
 		
-		}
-		
-	
+	}
 	
 }

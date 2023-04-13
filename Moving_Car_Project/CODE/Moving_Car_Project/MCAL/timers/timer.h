@@ -20,7 +20,7 @@
 #include "../../SERVICE/STD_TYPES.h"
 #include "../../SERVICE/UTILES.h"
 #include "../MEMORYMAP.h"
-
+#include "../EXI_INTERRUPT/EXI_INTERRUPT.h"
 
 
 
