@@ -4,8 +4,12 @@ static void (*ptrf_INT_0)(void)=NULL;
 static void (*ptrf_INT_1)(void)=NULL;
 static void (*ptrf_INT_2)(void)=NULL;
 
+uint8_t car_flag =0  ;
+/*****************************************************************************************************************/
 
-
+/**DESCRIPTION:-
+it enables one of the external interrupt
+*/
 EN_int__error_t EXI_Enable (EN_int_t Interrupt)
 {
 	switch (Interrupt)
@@ -21,6 +25,12 @@ EN_int__error_t EXI_Enable (EN_int_t Interrupt)
 		break;
 	}
 }
+/***********************************************************************************************************************/
+
+/**DESCRIPTION:-
+it disables one of the external interrupt
+*/
+
 EN_int__error_t EXI_Disable (EN_int_t Interrupt)
 {
 	switch (Interrupt)
@@ -36,6 +46,12 @@ EN_int__error_t EXI_Disable (EN_int_t Interrupt)
 		break;
 	}
 }
+/***************************************************************************************************************/
+
+/**DESCRIPTION:-
+it give you the ability to choose between different triggers 
+*/
+
 EN_int__error_t EXI_Trigger(EN_int_t Interrupt,EN_trig trigger)
 {
 	
@@ -92,7 +108,11 @@ EN_int__error_t EXI_Trigger(EN_int_t Interrupt,EN_trig trigger)
 		break;
 	}
 }
+/********************************************************************************************************************/
 
+/**DESCRIPTION:-
+it instruct the interrupt ISR to perform a specific function by passing the function
+*/
 
 
 void EXI_SetCallBack(EN_int_t Interrupt,void(*ptrf)(void))
@@ -110,8 +130,9 @@ void EXI_SetCallBack(EN_int_t Interrupt,void(*ptrf)(void))
 		break;
 	}
 }
+/*******************************************************ISR INT_0********************************************************/
 
-uint8_t car_flag =0  ; 
+
 ISR (INT0_vect)
 {
 	car_flag = 0;

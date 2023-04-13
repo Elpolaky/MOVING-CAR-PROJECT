@@ -1,19 +1,4 @@
-﻿/*
- * TIMERS.h
- *
- * Created: 08/04/2023 07:44:33 ص
- *  Author: Genius
- */ 
-
-
-/*
- * timer.h
- *
- * Created: 4/10/2023 8:55:51 AM
- *  Author: moham
- */ 
-
-
+﻿
 #ifndef TIMER_H_
 #define TIMER_H_
 
@@ -74,10 +59,6 @@ void TIMER_2_DELAY_MS(double _delay);
 void TIMER_2_INT();
 
 
-Timer_ErrorStatus PWM_Init();
-void PWM_Start();
-void PWM_Stop();
-void PWM_SetDutyCycle(uint8_t dutyCycle);
 
 extern uint8_t car_mode ;
 extern  int mode_ovf ;

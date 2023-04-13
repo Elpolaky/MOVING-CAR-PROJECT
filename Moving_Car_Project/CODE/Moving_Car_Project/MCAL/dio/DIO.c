@@ -2,7 +2,8 @@
 
 //*********************************APIS IMPLEMENTATION****************************************/
 
-/*it intiallizes a PIN with a certain status
+/*/**DESCRIPTION:-
+it intiallizes a PIN with a certain status
    */
 DIO_ERROR_TYPE DIO_INITPIN(DIO_PIN_TYPE PIN,DIO_PINSTATUS_TYPE STATUS)
 {
@@ -104,7 +105,7 @@ DIO_ERROR_TYPE DIO_INITPIN(DIO_PIN_TYPE PIN,DIO_PINSTATUS_TYPE STATUS)
 }
 /**********************************************************************************************/		
 
-/**
+/**DESCRIPTION:-
 this is used to set a pin into active high/low state
 **/
 DIO_ERROR_TYPE DIO_WRITEPIN(DIO_PIN_TYPE PIN,DIO_VOLTAGE_TYPE VOLTAGE)
@@ -176,7 +177,8 @@ DIO_ERROR_TYPE DIO_WRITEPIN(DIO_PIN_TYPE PIN,DIO_VOLTAGE_TYPE VOLTAGE)
 
 /********************************************************************************************/
 
-/*it reads a pin and return it's voltage state
+/**DESCRIPTION:-
+it reads a pin and return it's voltage state
 */
 DIO_ERROR_TYPE DIO_READPIN(DIO_PIN_TYPE PIN,DIO_VOLTAGE_TYPE* VOLT)
 {
@@ -213,6 +215,11 @@ DIO_ERROR_TYPE DIO_READPIN(DIO_PIN_TYPE PIN,DIO_VOLTAGE_TYPE* VOLT)
 	return VALID_DIO;
 }
 }
+/********************************************************************************************************************/
+/**DESCRIPTION:-
+this function toggels the pin from high to low or vise versa 
+**/
+
 void DIO_TogglePin(DIO_PIN_TYPE pin)
 {
 	uint8_t pin_num =pin%8;

@@ -1,11 +1,4 @@
-﻿/*
- * BUTTON.h
- *
- * Created: 08/04/2023 07:45:57 ص
- *  Author: Genius
- */ 
-
-
+﻿
 #ifndef button_H_
 #define button_H_
 /**********************includes**********************************************/

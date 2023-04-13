@@ -1,16 +1,18 @@
-﻿/*
- * TIMERS.c
- *
- * Created: 08/04/2023 07:44:43 ص
- *  Author: Genius
- */ 
-
+﻿
 #include "timer.h"
 #include <math.h>
-
+/*******************************************************************************************
+                                       global variables
+********************************************************************************************/
+double ovfNum  ;
+double t ;
 /*****************************************************************************************/
 //										 TIMER 0
 /*****************************************************************************************/
+/**DESCRIPTION:-
+ this function enbles a certain timer mode
+ **/
+
 Timer_ErrorStatus TIMER_0_init(Timer_Mode mode){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
 	
@@ -47,6 +49,11 @@ Timer_ErrorStatus TIMER_0_init(Timer_Mode mode){
 	
 	
 }
+/************************************************************************************************************************/
+/**DESCRIPTION:-
+ this function enbles a certain timer prescaler
+ **/
+
 Timer_ErrorStatus TIMER_0_start(Timer_Prescaler prescaler){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
 	
@@ -89,6 +96,11 @@ Timer_ErrorStatus TIMER_0_start(Timer_Prescaler prescaler){
 	
 	return errorStatus ;
 }
+/***********************************************************************************************************************/
+/**DESCRIPTION:-
+ this function disables the timer
+ **/
+
 void TIMER_0_stop(void){
 	
 	clear_bit(TCCR0,CS00);
@@ -96,7 +108,10 @@ void TIMER_0_stop(void){
 	clear_bit(TCCR0,CS02);
 	
 }
-
+/******************************************************************************************************************************/
+/**DESCRIPTION:-
+ this function set the offset of the timer counter
+ **/
 
 Timer_ErrorStatus TIMER_0_setIntialValue(double value){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
@@ -109,7 +124,10 @@ Timer_ErrorStatus TIMER_0_setIntialValue(double value){
 	}
 	return errorStatus ;
 }
+/************************************************************************************************************************/
+/**DESCRIPTION:-
 
+ **/
 
 Timer_ErrorStatus TIMER_0_OvfNum(double overflow){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
@@ -143,11 +161,11 @@ Timer_ErrorStatus TIMER_0_OvfNum(double overflow){
 	
 	return errorStatus;
 }
+/************************************************************************************************************************/
+/**DESCRIPTION:-
+ TIMER_0_DELAY_MS 
+ **/
 
-
-/********************** TIMER_0_DELAY_MS ********************/
-	double ovfNum  ;
-	double t ;
 void TIMER_0_DELAY_MS(double time_ms){
 	 t = time_ms/1000 ;
 	ovfNum = ceil (t / 0.000256) ;

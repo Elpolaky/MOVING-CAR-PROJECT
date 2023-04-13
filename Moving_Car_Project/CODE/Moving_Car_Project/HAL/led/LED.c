@@ -1,4 +1,9 @@
 ﻿#include "LED.h"
+
+
+/**DESCRIPTION:-
+it intializes a pin to be an output pin
+**/
 LED_ERROR_TYPE LED_INIT(DIO_PIN_TYPE PIN)
 {
 	DIO_PIN_TYPE PIN_NUM;
@@ -19,6 +24,10 @@ LED_ERROR_TYPE LED_INIT(DIO_PIN_TYPE PIN)
 		return VALID_LED;
 	}
 }
+/**************************************************************************************************************************/
+/**DESCRIPTION:-
+it sets a certain pin with a high state so that the led will be on 
+**/
 LED_ERROR_TYPE LED_ON(DIO_PIN_TYPE PIN)
 {
 	DIO_PIN_TYPE PIN_NUM;
@@ -39,6 +48,11 @@ LED_ERROR_TYPE LED_ON(DIO_PIN_TYPE PIN)
 		return VALID_LED;
 	}
 }
+/*************************************************************************************************************************/
+/**DESCRIPTION:-
+it sets a sertatin pin with a low voltage so that the led will be off
+**/
+
 LED_ERROR_TYPE LED_OFF(DIO_PIN_TYPE PIN)
 {
 	DIO_PIN_TYPE PIN_NUM;

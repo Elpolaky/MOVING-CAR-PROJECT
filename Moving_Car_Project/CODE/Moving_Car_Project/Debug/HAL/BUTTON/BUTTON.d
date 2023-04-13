@@ -1,15 +1,15 @@
-HAL/button/button.d HAL/button/button.o: ../HAL/button/button.c \
- ../HAL/button/BUTTON.h ../HAL/button/../../MCAL/DIO/DIO.h \
- ../HAL/button/../../MCAL/DIO/../../SERVICE/utiles.h \
- ../HAL/button/../../MCAL/DIO/../memorymap.h \
- ../HAL/button/../../MCAL/DIO/../../SERVICE/std_types.h
+HAL/BUTTON/BUTTON.d HAL/BUTTON/BUTTON.o: ../HAL/BUTTON/BUTTON.c \
+ ../HAL/BUTTON/BUTTON.h ../HAL/BUTTON/../../MCAL/DIO/DIO.h \
+ ../HAL/BUTTON/../../MCAL/DIO/../../SERVICE/utiles.h \
+ ../HAL/BUTTON/../../MCAL/DIO/../memorymap.h \
+ ../HAL/BUTTON/../../MCAL/DIO/../../SERVICE/std_types.h
 
-../HAL/button/BUTTON.h:
+../HAL/BUTTON/BUTTON.h:
 
-../HAL/button/../../MCAL/DIO/DIO.h:
+../HAL/BUTTON/../../MCAL/DIO/DIO.h:
 
-../HAL/button/../../MCAL/DIO/../../SERVICE/utiles.h:
+../HAL/BUTTON/../../MCAL/DIO/../../SERVICE/utiles.h:
 
-../HAL/button/../../MCAL/DIO/../memorymap.h:
+../HAL/BUTTON/../../MCAL/DIO/../memorymap.h:
 
-../HAL/button/../../MCAL/DIO/../../SERVICE/std_types.h:
+../HAL/BUTTON/../../MCAL/DIO/../../SERVICE/std_types.h:

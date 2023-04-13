@@ -114,7 +114,9 @@ void app_Init(void){
 	
 	sei();
 	
-	LED_INIT(pinb0);// pwm 
+	LED_INIT(pinb0);	// pwm 
+	LED_INIT(pind4);	// timer start
+	LED_INIT(pind5);	// timer stop
 	
 	Button_INIT(pind2);
 	EXI_Enable(EXT_INT_0);
@@ -141,7 +143,8 @@ void app_Start(void){
 
 	if(car_flag==1){
 		
-	
+		LED_ON(pind4);  //  start timer
+		LED_OFF(pind5);
 			
 			if (car_mode == 0)
 			{
@@ -204,6 +207,11 @@ void app_Start(void){
 				
 			}
 			
+		}else{
+			//rest timer
+			LED_OFF(pind4); 
+			LED_ON(pind5);
+
 		}
 
 	
