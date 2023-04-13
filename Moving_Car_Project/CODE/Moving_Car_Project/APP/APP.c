@@ -1,22 +1,39 @@
 ﻿#include "APP.h"
-float t;
-float s;
-float t2;
 
-void pwm(float speed){
-	 s= speed/100;
-	 t=  (s * 256);
-	 t2=256-t;
-	TIMER_0_pwm(t);
+/***********************************************************************************************************************
+                                    GLOBAL VARIABLES 
+*****************************************************************************************************************************/
+// used in pwm
+float g_time1;
+float g_speed;
+float g_time2;
+
+// used in rotate_90degree_calculation
+float rotation_per_circle;
+float time_rotation_state ;
+/***********************************************************************************************************************
+                                   FUNCTION IMPLMENTATION
+****************************************************************************************************************************/
+
+/**DESCRIPTION:-
+  this function is used to make pwm in pin pinb0
+  **/
+void pwm(float a_speed){
+	 g_speed= a_speed/100;
+	g_time1=  (g_speed * 256);
+	 g_time2=256-g_time1;
+	TIMER_0_pwm(g_time1);
 	LED_ON(pinb0);
 	
-	TIMER_0_pwm(t2);
+	TIMER_0_pwm(g_time2);
 	LED_OFF(pinb0);
 	
 }
 
-
-
+/********************************************************************************************/
+/**DESCRIPTION:-
+  this function is used for short side --> move with 30 % max speed for 2 seconds
+  **/
 void shortSide_start()
 {
 	//mode_ovf= 7813 ;
@@ -28,7 +45,10 @@ void shortSide_start()
 
 }
 
-
+/********************************************************************************************/
+/**DESCRIPTION:-
+  this function is used for short side --> move with 50 % max speed for 3 seconds
+  **/
 
 void longSide_start()
 {
@@ -48,11 +68,10 @@ void ready_State(void){
 }
 
 
-float rotation_per_circle;
-float time_rotation_state ;
-/***************************************************************************************************************************************
+/*****************************************************************************************************
 **DESCRIPTION:-
 this function calculates the time nedded of rotation to turn the car 90 degree*/
+
 void rotate_90degree_calculation (void)
 {
 	//1-Rotation of wheels needed to make a circular path calculations:
@@ -92,6 +111,7 @@ void car_stop_state (void) {
 **DESCRIPTION:-
 this function makes the car stop for another 0.5 sec then rotate 90 degree to the right then stop for another 0.5 sec
 LED four is the indicator of rotating phase*/
+
 void rotate_90degree_state (void)
 {
 	LED_OFF(pinc0);
@@ -109,7 +129,7 @@ void rotate_90degree_state (void)
 
 
 
-/*********************************************/
+
 void app_Init(void){
 	
 	sei();

@@ -33,8 +33,11 @@ this function is used to drive the right wheels to move FWD, and the left wheels
 which will lead to rotation of the car */
 void Car_Rotating(void)
 {
-	DIO_WRITEPIN(motor1_0,LOW);          //this is used to provide voltage to the +ve pin of the motor
-	DIO_WRITEPIN(motor1_1,LOW);           //this is used to provide the ground to the -ve pin of
+	 //this is used to provide the ground to the -ve pin of
+	DIO_WRITEPIN(motor1_0,HIGH);        
+	DIO_WRITEPIN(motor1_1,LOW);    
+	
+	//this is used to provide voltage to the +ve pin of the motor
 	DIO_WRITEPIN(motor2_0,LOW);
 	DIO_WRITEPIN(motor2_1,HIGH);
 

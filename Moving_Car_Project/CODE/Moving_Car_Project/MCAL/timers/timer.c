@@ -1,22 +1,29 @@
 ﻿
 #include "timer.h"
 #include <math.h>
-/*******************************************************************************************
+/*********************************************************************************************************
                                        global variables
-********************************************************************************************/
-double ovfNum  ;
-double t ;
-/*****************************************************************************************/
+*********************************************************************************************************/
+ // used in TIME_0_DELAY_MS
+static double g_ovfNum  ; 
+static double g_time ;
+
+ // used in TIMER_2_INT
+uint8_t car_mode = 0;
+int32_t mode_ovf = 0;
+static int32_t ovf = 0;
+/******************************************************************************************************/
 //										 TIMER 0
-/*****************************************************************************************/
+/**************************************************************************************************/
+
 /**DESCRIPTION:-
  this function enbles a certain timer mode
  **/
 
-Timer_ErrorStatus TIMER_0_init(Timer_Mode mode){
+Timer_ErrorStatus TIMER_0_init(Timer_Mode a_mode){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
 	
-	switch(mode){
+	switch(a_mode){
 		
 		case NORMAL_MODE :
 		clear_bit(TCCR0,WGM00);
@@ -49,15 +56,15 @@ Timer_ErrorStatus TIMER_0_init(Timer_Mode mode){
 	
 	
 }
-/************************************************************************************************************************/
+/*************************************************************************************************************/
 /**DESCRIPTION:-
  this function enbles a certain timer prescaler
  **/
 
-Timer_ErrorStatus TIMER_0_start(Timer_Prescaler prescaler){
+Timer_ErrorStatus TIMER_0_start(Timer_Prescaler a_prescaler){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
 	
-	switch(prescaler){
+	switch(a_prescaler){
 		
 		case PRECALER_1 :
 		set_bit(TCCR0,CS00);
@@ -96,7 +103,7 @@ Timer_ErrorStatus TIMER_0_start(Timer_Prescaler prescaler){
 	
 	return errorStatus ;
 }
-/***********************************************************************************************************************/
+/***********************************************************************************************************/
 /**DESCRIPTION:-
  this function disables the timer
  **/
@@ -108,51 +115,51 @@ void TIMER_0_stop(void){
 	clear_bit(TCCR0,CS02);
 	
 }
-/******************************************************************************************************************************/
+/**********************************************************************************************************/
 /**DESCRIPTION:-
  this function set the offset of the timer counter
  **/
 
-Timer_ErrorStatus TIMER_0_setIntialValue(double value){
+Timer_ErrorStatus TIMER_0_setIntialValue(double a_value){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
 
-	if(value < TIMR0_MAX_VALUE && value >= 0){
+	if(a_value < TIMR0_MAX_VALUE && a_value >= 0){
 		
-		TCNT0 = ceil(value) ;
+		TCNT0 = ceil(a_value) ;
 	}else{
 		errorStatus = INVALID_VALUE;
 	}
 	return errorStatus ;
 }
-/************************************************************************************************************************/
+/******************************************************************************************************/
 /**DESCRIPTION:-
-
+takes number of overflow that we want to reach
  **/
 
-Timer_ErrorStatus TIMER_0_OvfNum(double overflow){
+Timer_ErrorStatus TIMER_0_OvfNum(double a_overflow){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
-	double num_ovf = 0;
-	if (overflow > 0)
+	double l_num_ovf = 0;
+	if (a_overflow > 0)
 	{
 		
 		
-		while(num_ovf<overflow){
+		while(l_num_ovf<a_overflow){
 			
 			while(read_bit(TIFR,TOV0)==0);
 			set_bit(TIFR,TOV0);
-			num_ovf++;
+			l_num_ovf++;
 		}
-		num_ovf = 0;
-	}else if (overflow <= 0)
+		l_num_ovf = 0;
+	}else if (a_overflow <= 0)
 	{
-		overflow = 1 ;
-		while(num_ovf<overflow){
+		a_overflow = 1 ;
+		while(l_num_ovf<a_overflow){
 			
 			while(read_bit(TIFR,TOV0)==0);
 			set_bit(TIFR,TOV0);
-			num_ovf++;
+			l_num_ovf++;
 		}
-		num_ovf = 0;
+		l_num_ovf = 0;
 	}
 		
 		else{
@@ -161,18 +168,18 @@ Timer_ErrorStatus TIMER_0_OvfNum(double overflow){
 	
 	return errorStatus;
 }
-/************************************************************************************************************************/
+/**********************************************************************************************************/
 /**DESCRIPTION:-
- TIMER_0_DELAY_MS 
+ this function takes time in ms to make a delay with this time
  **/
 
-void TIMER_0_DELAY_MS(double time_ms){
-	 t = time_ms/1000 ;
-	ovfNum = ceil (t / 0.000256) ;
+void TIMER_0_DELAY_MS(double a_time_ms){
+	 g_time = a_time_ms/1000 ;
+	g_ovfNum = ceil (g_time / 0.000256) ;
 	TIMER_0_init(NORMAL_MODE);
 	TIMER_0_setIntialValue(0);
 	TIMER_0_start(PRECALER_1);
-	TIMER_0_OvfNum(ovfNum);
+	TIMER_0_OvfNum(g_ovfNum);
 	
 }
 
@@ -197,14 +204,17 @@ void TIMER_0_pwm(float intial){
 	
 }
 */
-
-/********************** PWM  ****************************/
-void TIMER_0_pwm(float intial){
+/**************************************************************************************************************/
+/**DESCRIPTION:-
+ this function is PWM using normal mode 
+ 
+ **/
+void TIMER_0_pwm(float a_intial){
 	
-	uint8_t timer = ceil(intial);
+	uint8_t l_timer = ceil(a_intial);
 	TIMER_0_init(NORMAL_MODE);
 	
-	TCNT0 =   timer ;
+	TCNT0 =   l_timer ;
 	
 	TIMER_0_start(PRECALER_1024);
 	
@@ -221,10 +231,10 @@ void TIMER_0_pwm(float intial){
 
 
 
-Timer_ErrorStatus TIMER_2_init(Timer_Mode mode){
+Timer_ErrorStatus TIMER_2_init(Timer_Mode a_mode){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
 	
-	switch(mode){
+	switch(a_mode){
 		
 		case NORMAL_MODE :
 		clear_bit(TCCR2,WGM20);
@@ -270,12 +280,12 @@ void TIMER_2_stop(void){
 
 
 
-Timer_ErrorStatus TIMER_2_setIntialValue(uint8_t value){
+Timer_ErrorStatus TIMER_2_setIntialValue(uint8_t a_value){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
 
-	if(value < TIMR2_MAX_VALUE && value >= 0){
+	if(a_value < TIMR2_MAX_VALUE && a_value >= 0){
 		
-		TCNT2 = value ;
+		TCNT2 = a_value ;
 		}else{
 		errorStatus = INVALID_VALUE;
 	}
@@ -284,10 +294,10 @@ Timer_ErrorStatus TIMER_2_setIntialValue(uint8_t value){
 
 
 
-Timer_ErrorStatus TIMER_2_start(Timer_Prescaler prescaler){
+Timer_ErrorStatus TIMER_2_start(Timer_Prescaler a_prescaler){
 	Timer_ErrorStatus errorStatus = TIMER_OK;
 	
-	switch(prescaler){
+	switch(a_prescaler){
 		
 		case PRECALER_1 :
 		set_bit(TCCR2,CS20);
@@ -407,9 +417,6 @@ void TIMER_2_INT(){
 
 
 
-uint8_t car_mode = 0;
-int mode_ovf = 0;
- int ovf = 0;
 
 ISR(TIMER2_OVF){
 	if(car_flag == 1){

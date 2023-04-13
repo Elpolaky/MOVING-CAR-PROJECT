@@ -2,6 +2,10 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
+
+/*****************************************************************************************************************************************************************
+*									Includes																				 *
+******************************************************************************************************************************************************************/
 #include "../../SERVICE/STD_TYPES.h"
 #include "../../SERVICE/UTILES.h"
 #include "../MEMORYMAP.h"
@@ -9,8 +13,19 @@
 
 
 
+/***********************************************************************************************************************
+                                    GLOBAL VARIABLES AND DEFINES
+******************************************************************************************************************************/
+
 #define TIMR0_MAX_VALUE		256
 #define TIMR2_MAX_VALUE		256
+extern uint8_t car_mode ;
+extern  int32_t mode_ovf ;
+
+/*****************************************************************************************************************************************************************
+*									Typedefs																				 *
+******************************************************************************************************************************************************************/
+
 
 typedef enum {
 	INVALID_PRESCALER,
@@ -39,20 +54,26 @@ typedef enum{
 	}Timer_Prescaler;
 
 
-/********************************** TIMER_0_ ******************************************/
-Timer_ErrorStatus TIMER_0_init(Timer_Mode mode);
-Timer_ErrorStatus TIMER_0_start(Timer_Prescaler prescaler);
-void TIMER_0_stop(void);
-Timer_ErrorStatus TIMER_0_setIntialValue(double value);
-Timer_ErrorStatus TIMER_0_OvfNum(double overflow);
-void TIMER_0_DELAY_MS(double _delay);
 
-void TIMER_0_pwm(float intial);
+
+/*****************************************************************************************************************************************************************
+*									Functions declarations																				 *
+******************************************************************************************************************************************************************/
+
+/********************************** TIMER_0_ ******************************************/
+Timer_ErrorStatus TIMER_0_init(Timer_Mode a_mode);
+Timer_ErrorStatus TIMER_0_start(Timer_Prescaler a_prescaler);
+void TIMER_0_stop(void);
+Timer_ErrorStatus TIMER_0_setIntialValue(double a_value);
+Timer_ErrorStatus TIMER_0_OvfNum(double a_overflow);
+void TIMER_0_DELAY_MS(double a_time_ms);
+
+void TIMER_0_pwm(float a_intial);
 /********************************** TIMER_2_ ******************************************/
-Timer_ErrorStatus TIMER_2_init(Timer_Mode mode);
-Timer_ErrorStatus TIMER_2_start(Timer_Prescaler prescaler);
+Timer_ErrorStatus TIMER_2_init(Timer_Mode a_mode);
+Timer_ErrorStatus TIMER_2_start(Timer_Prescaler a_prescaler);
 void TIMER_2_stop(void);
-Timer_ErrorStatus TIMER_2_setIntialValue(uint8_t value);
+Timer_ErrorStatus TIMER_2_setIntialValue(uint8_t a_value);
 Timer_ErrorStatus TIMER_2_OvfNum(double overflow);
 void TIMER_2_DELAY_MS(double _delay);
 
@@ -60,7 +81,6 @@ void TIMER_2_INT();
 
 
 
-extern uint8_t car_mode ;
-extern  int mode_ovf ;
+
 
 #endif /* TIMER_H_ */
